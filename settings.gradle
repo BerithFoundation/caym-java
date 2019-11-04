@@ -1,0 +1,3 @@
+rootProject.name = 'caym-java'
+include 'core'
+

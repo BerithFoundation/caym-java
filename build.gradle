@@ -1,0 +1,45 @@
+buildscript {
+    ext.web3jVersion = '4.5.5'
+    ext.slf4jVersion = '1.7.25'
+
+    // test dependencies
+    ext.junitVersion = '4.12'
+    ext.mockitoVersion = '1.10.19'
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+allprojects {
+    description 'caym-java project'
+    version '0.1.0'
+    group 'berith.caym'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    javadoc {
+        options.encoding = 'UTF-8'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    dependencies {
+        testCompile "junit:junit:$junitVersion",
+                "org.mockito:mockito-core:$mockitoVersion",
+                "ch.qos.logback:logback-core:1.2.3",
+                "ch.qos.logback:logback-classic:1.2.3"
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
