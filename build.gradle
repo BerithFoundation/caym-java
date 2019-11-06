@@ -10,6 +10,7 @@ buildscript {
 plugins {
     id 'java'
     id 'idea'
+    id 'maven'
 }
 
 allprojects {
@@ -41,5 +42,50 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+}
+
+configure(subprojects.findAll { it.name != 'integration-test' }) {
+    apply plugin: 'maven'
+
+    // Deploy
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task testJar(type: Jar) {
+        classifier = 'tests'
+        from sourceSets.test.output
+    }
+
+    ext {
+        isSnapshotVersion = project.version.endsWith("-SNAPSHOT")
+    }
+
+    artifacts {
+        archives sourcesJar, javadocJar
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: 'http://www.jworksuite.com:8082/nexus/content/repositories/releases/') {
+                    authentication(userName: mavenUser, password: mavenPassword)
+                }
+            }
+        }
+    }
+
+    task release {
+        dependsOn 'build'
+        dependsOn 'uploadArchives'
+
+        tasks.findByName('uploadArchives').mustRunAfter 'build'
     }
 }
