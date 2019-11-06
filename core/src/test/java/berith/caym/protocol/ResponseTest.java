@@ -23,6 +23,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import berith.caym.protocol.response.AmonBlockCreators;
+import berith.caym.protocol.response.AmonJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithBlock.Block;
@@ -44,6 +46,7 @@ import berith.caym.protocol.response.Quantity;
 import berith.caym.protocol.response.Transaction;
 import berith.caym.protocol.response.TransactionReceipt;
 import java.math.BigInteger;
+import java.util.List;
 import org.junit.Test;
 import org.web3j.protocol.admin.methods.response.BooleanResponse;
 import org.web3j.protocol.core.Response;
@@ -524,6 +527,42 @@ public class ResponseTest extends AbstractResponseTester {
         assertThat(logObject.getTopics().get(0), is("0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"));
     }
 
+    @Test
+    public void testAmonBlockCreators() throws Exception {
+        // includes
+        // - amon_getBlockCreatorsByNumber
+        // - amon_getBlockCreatorsByHash
+        buildResponse("{\n"
+            + "  \"jsonrpc\": \"2.0\",\n"
+            + "  \"id\": 1,\n"
+            + "  \"result\": [\n"
+            + "    \"Bxca7207de79e55c1a69dbc67a4a2e81dfc62c6ac4\",\n"
+            + "    \"Bxd8a25ff31c6174ce7bce74ca4a91c2e816dbf91e\",\n"
+            + "    \"Bx90865e6e6737fe766dd08f39cc2cf1550b5f3875\",\n"
+            + "    \"Bxbb926bbb0b15ca54d4a19dcdf44fc8940e3f6da3\",\n"
+            + "    \"Bx8676fb254279ef78c53b8a781e228ab439065786\"\n"
+            + "  ]\n"
+            + "}");
+        AmonBlockCreators creators = deserialiseResponse(AmonBlockCreators.class);
+        assertTrue(creators.getBlockCreators().size() == 5);
+        assertTrue(creators.getBlockCreators().contains("Bxca7207de79e55c1a69dbc67a4a2e81dfc62c6ac4"));
+        assertTrue(creators.getBlockCreators().contains("Bxd8a25ff31c6174ce7bce74ca4a91c2e816dbf91e"));
+        assertTrue(creators.getBlockCreators().contains("Bx90865e6e6737fe766dd08f39cc2cf1550b5f3875"));
+        assertTrue(creators.getBlockCreators().contains("Bxbb926bbb0b15ca54d4a19dcdf44fc8940e3f6da3"));
+        assertTrue(creators.getBlockCreators().contains("Bx8676fb254279ef78c53b8a781e228ab439065786"));
+    }
+
+    @Test
+    public void testAmonJoinRatio() throws Exception {
+        buildResponse("{\n"
+            + "  \"jsonrpc\": \"2.0\",\n"
+            + "  \"id\": 1,\n"
+            + "  \"result\": 0.13333333333333333\n"
+            + "}");
+        AmonJoinRatio joinRatio = deserialiseResponse(AmonJoinRatio.class);
+        assertTrue(joinRatio.getJoinRatio() == 0.13333333333333333D);
+    }
+
     // ========== helpers for tests
     private void assertBigInteger(BigInteger bi, String hex) {
         assertThat(bi.toString(16), is(Numeric.cleanHexPrefix(hex)));
@@ -533,4 +572,6 @@ public class ResponseTest extends AbstractResponseTester {
         byte[] bytes = Numeric.hexStringToByteArray(hex);
         return new BigInteger(bytes).longValue();
     }
+
+
 }

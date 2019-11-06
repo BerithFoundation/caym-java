@@ -3,6 +3,8 @@ package berith.caym;
 
 import berith.caym.protocol.request.BerithFilterRequest;
 import berith.caym.protocol.request.TransactionRequest;
+import berith.caym.protocol.response.AmonBlockCreators;
+import berith.caym.protocol.response.AmonJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithCall;
@@ -31,6 +33,8 @@ import org.web3j.protocol.core.methods.response.Web3Sha3;
  */
 public interface Berith {
 
+    // tag: web3 module
+
     /**
      * Returns the current client version {@link Web3ClientVersion}
      */
@@ -40,6 +44,8 @@ public interface Berith {
      * Returns Keccak-256 {@link Web3Sha3}(not the standardized SHA3-256) of the given data
      */
     Request<?, Web3Sha3> web3Sha3(String data);
+
+    // tag: net module
 
     /**
      * Returns the current network id {@link NetVersion}
@@ -55,6 +61,8 @@ public interface Berith {
      * Returns true if client is actively listening for network connections
      */
     Request<?, BooleanResponse> netListening();
+
+    // tag: berith module
 
     /**
      * Returns the current berith protocol version {@link BerithProtocolVersion}
@@ -225,4 +233,21 @@ public interface Berith {
      * Returns an array of all logs
      */
     Request<?, BerithLog> berithGetLogs(BerithFilterRequest berithFilterRequest);
+
+    // tag: amon module
+
+    /**
+     * Returns an array of addresses {@link AmonBlockCreators} who can seal a block given block number
+     */
+    Request<?, AmonBlockCreators> amonGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter);
+
+    /**
+     * Returns an array of addresses {@link AmonBlockCreators} who can seal a block given block hash
+     */
+    Request<?, AmonBlockCreators> amonGetBlockCreatorsByHash(String blockHash);
+
+    /**
+     * Returns a probability of the top of block creators
+     */
+    Request<?, AmonJoinRatio> amonGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter);
 }
