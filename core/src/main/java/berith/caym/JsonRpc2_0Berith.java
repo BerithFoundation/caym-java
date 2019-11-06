@@ -18,6 +18,8 @@ package berith.caym;
 
 import berith.caym.protocol.request.BerithFilterRequest;
 import berith.caym.protocol.request.TransactionRequest;
+import berith.caym.protocol.response.AmonBlockCreators;
+import berith.caym.protocol.response.AmonJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithCall;
@@ -401,5 +403,32 @@ public class JsonRpc2_0Berith implements Berith {
             Arrays.asList(berithFilterRequest),
             web3jService,
             BerithLog.class);
+    }
+
+    @Override
+    public Request<?, AmonBlockCreators> amonGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter) {
+        return new Request<>(
+            "amon_getBlockCreatorsByNumber",
+            Arrays.asList(defaultBlockParameter),
+            web3jService,
+            AmonBlockCreators.class);
+    }
+
+    @Override
+    public Request<?, AmonBlockCreators> amonGetBlockCreatorsByHash(String blockHash) {
+        return new Request<>(
+            "amon_getBlockCreatorsByHash",
+            Arrays.asList(blockHash),
+            web3jService,
+            AmonBlockCreators.class);
+    }
+
+    @Override
+    public Request<?, AmonJoinRatio> amonGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter) {
+        return new Request<>(
+            "amon_getJoinRatio",
+            Arrays.asList(address, defaultBlockParameter),
+            web3jService,
+            AmonJoinRatio.class);
     }
 }

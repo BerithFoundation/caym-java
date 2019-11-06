@@ -412,4 +412,35 @@ public class RequestTest extends AbstractRequestTester {
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"berith_getLogs\",\"params\":[{\"topics\":[],"
             + "\"fromBlock\":\"0x1\",\"toBlock\":\"0xa\",\"address\":[]}],\"id\":1}");
     }
+
+    @Test
+    public void testAmonGetBlockCreatorsByNumber() throws Exception {
+        caym.berith().amonGetBlockCreatorsByNumber(DefaultBlockParameterName.LATEST).send();
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"amon_getBlockCreatorsByNumber\","
+            + "\"params\":[\"latest\"],\"id\":1}");
+
+        caym.berith().amonGetBlockCreatorsByNumber(DefaultBlockParameterName.EARLIEST).send();
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"amon_getBlockCreatorsByNumber\","
+            + "\"params\":[\"earliest\"],\"id\":1}");
+
+        caym.berith().amonGetBlockCreatorsByNumber(DefaultBlockParameter.valueOf(BigInteger.ONE)).send();
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"amon_getBlockCreatorsByNumber\","
+            + "\"params\":[\"0x1\"],\"id\":1}");
+    }
+
+    @Test
+    public void testAmonGetBlockCreatorsByHash() throws Exception {
+        final String blockHash = "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238";
+        caym.berith().amonGetBlockCreatorsByHash(blockHash).send();
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"amon_getBlockCreatorsByHash\","
+            + "\"params\":[\"0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238\"],\"id\":1}");
+    }
+
+    @Test
+    public void testAmonGetJoinRatio() throws Exception {
+        final String address = "Bxc94770007dda54cF92009BFF0dE90c06F603a09f";
+        caym.berith().amonGetJoinRatio(address, DefaultBlockParameterName.LATEST).send();
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"amon_getJoinRatio\","
+            + "\"params\":[\"Bxc94770007dda54cF92009BFF0dE90c06F603a09f\",\"latest\"],\"id\":1}");
+    }
 }

@@ -42,7 +42,8 @@ import org.web3j.protocol.core.RpcErrors;
  */
 public abstract class Filter<T> {
 
-    private static final Logger log = LoggerFactory.getLogger(Filter.class);
+    private static final Logger logger = LoggerFactory.getLogger(Filter.class);
+    private static final long DEFAULT_POLLING_DEADLINE = TimeUnit.MINUTES.toMillis(5);
 
     // final Web3j web3j;
     final Caym caym;
@@ -59,6 +60,11 @@ public abstract class Filter<T> {
     }
 
     public void run(ScheduledExecutorService scheduledExecutorService, long pollingInterval) {
+        // berith node has deadline about filters.
+        if (pollingInterval <= DEFAULT_POLLING_DEADLINE) {
+            logger.warn("recommend to use polling interval less then " + DEFAULT_POLLING_DEADLINE);
+        }
+
         try {
             BerithFilter berithFilter = sendRequest();
             if (berithFilter.hasError()) {
@@ -96,7 +102,7 @@ public abstract class Filter<T> {
                     } catch (Throwable e) {
                         // All exceptions must be caught, otherwise our job terminates without
                         // any notification
-                        log.error("Error sending request", e);
+                        logger.error("Error sending request", e);
                         callback.onError(e);
                     }
                 },
@@ -148,7 +154,7 @@ public abstract class Filter<T> {
     abstract void process(List<LogResult> logResults);
 
     private void reinstallFilter() {
-        log.warn("The filter has not been found. Filter id: " + filterId);
+        logger.warn("The filter has not been found. Filter id: " + filterId);
         schedule.cancel(true);
         run(scheduledExecutorService, pollingInterval);
     }
