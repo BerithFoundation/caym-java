@@ -15,7 +15,7 @@ plugins {
 
 allprojects {
     description 'caym-java project'
-    version '0.1.0'
+    version '0.1.1'
     group 'berith.caym'
 
     sourceCompatibility = 1.8
