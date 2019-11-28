@@ -18,8 +18,8 @@ package berith.caym;
 
 import berith.caym.protocol.request.BerithFilterRequest;
 import berith.caym.protocol.request.TransactionRequest;
-import berith.caym.protocol.response.AmonBlockCreators;
-import berith.caym.protocol.response.AmonJoinRatio;
+import berith.caym.protocol.response.BSRRBlockCreators;
+import berith.caym.protocol.response.BSRRJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithCall;
@@ -406,29 +406,29 @@ public class JsonRpc2_0Berith implements Berith {
     }
 
     @Override
-    public Request<?, AmonBlockCreators> amonGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "amon_getBlockCreatorsByNumber",
+            "bsrr_getBlockCreatorsByNumber",
             Arrays.asList(defaultBlockParameter),
             web3jService,
-            AmonBlockCreators.class);
+            BSRRBlockCreators.class);
     }
 
     @Override
-    public Request<?, AmonBlockCreators> amonGetBlockCreatorsByHash(String blockHash) {
+    public Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByHash(String blockHash) {
         return new Request<>(
-            "amon_getBlockCreatorsByHash",
+            "bsrr_getBlockCreatorsByHash",
             Arrays.asList(blockHash),
             web3jService,
-            AmonBlockCreators.class);
+            BSRRBlockCreators.class);
     }
 
     @Override
-    public Request<?, AmonJoinRatio> amonGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BSRRJoinRatio> bsrrGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "amon_getJoinRatio",
+            "bsrr_getJoinRatio",
             Arrays.asList(address, defaultBlockParameter),
             web3jService,
-            AmonJoinRatio.class);
+            BSRRJoinRatio.class);
     }
 }

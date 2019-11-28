@@ -3,8 +3,8 @@ package berith.caym;
 
 import berith.caym.protocol.request.BerithFilterRequest;
 import berith.caym.protocol.request.TransactionRequest;
-import berith.caym.protocol.response.AmonBlockCreators;
-import berith.caym.protocol.response.AmonJoinRatio;
+import berith.caym.protocol.response.BSRRBlockCreators;
+import berith.caym.protocol.response.BSRRJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithCall;
@@ -234,20 +234,20 @@ public interface Berith {
      */
     Request<?, BerithLog> berithGetLogs(BerithFilterRequest berithFilterRequest);
 
-    // tag: amon module
+    // tag: bsrr module
 
     /**
-     * Returns an array of addresses {@link AmonBlockCreators} who can seal a block given block number
+     * Returns an array of addresses {@link BSRRBlockCreators} who can seal a block given block number
      */
-    Request<?, AmonBlockCreators> amonGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter);
+    Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter);
 
     /**
-     * Returns an array of addresses {@link AmonBlockCreators} who can seal a block given block hash
+     * Returns an array of addresses {@link BSRRBlockCreators} who can seal a block given block hash
      */
-    Request<?, AmonBlockCreators> amonGetBlockCreatorsByHash(String blockHash);
+    Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByHash(String blockHash);
 
     /**
      * Returns a probability of the top of block creators
      */
-    Request<?, AmonJoinRatio> amonGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter);
+    Request<?, BSRRJoinRatio> bsrrGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter);
 }

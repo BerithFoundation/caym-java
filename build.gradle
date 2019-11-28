@@ -65,6 +65,9 @@ configure(subprojects.findAll { it.name != 'integration-test' }) {
     }
 
     ext {
+        repoUrl = project.hasProperty('repositoryUrl') ? project.property('repositoryUrl') : System.getenv('REPOSITORY_URL')
+        mavenuser = project.hasProperty('mavenUser') ? project.property('mavenUser') : System.getenv('MAVEN_USER')
+        mavenpassword = project.hasProperty('mavenPassword') ? project.property('mavenPassword') : System.getenv('MAVEN_PASSWORD')
         isSnapshotVersion = project.version.endsWith("-SNAPSHOT")
     }
 
@@ -75,8 +78,8 @@ configure(subprojects.findAll { it.name != 'integration-test' }) {
     uploadArchives {
         repositories {
             mavenDeployer {
-                repository(url: repositoryUrl) {
-                    authentication(userName: mavenUser, password: mavenPassword)
+                repository(url: repoUrl) {
+                    authentication(userName: mavenuser, password: mavenpassword)
                 }
             }
         }
