@@ -23,8 +23,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import berith.caym.protocol.response.AmonBlockCreators;
-import berith.caym.protocol.response.AmonJoinRatio;
+import berith.caym.protocol.response.BSRRBlockCreators;
+import berith.caym.protocol.response.BSRRJoinRatio;
 import berith.caym.protocol.response.BerithAccounts;
 import berith.caym.protocol.response.BerithBlock;
 import berith.caym.protocol.response.BerithBlock.Block;
@@ -542,7 +542,7 @@ public class ResponseTest extends AbstractResponseTester {
             + "    \"Bx8676fb254279ef78c53b8a781e228ab439065786\"\n"
             + "  ]\n"
             + "}");
-        AmonBlockCreators creators = deserialiseResponse(AmonBlockCreators.class);
+        BSRRBlockCreators creators = deserialiseResponse(BSRRBlockCreators.class);
         assertTrue(creators.getBlockCreators().size() == 5);
         assertTrue(creators.getBlockCreators().contains("Bxca7207de79e55c1a69dbc67a4a2e81dfc62c6ac4"));
         assertTrue(creators.getBlockCreators().contains("Bxd8a25ff31c6174ce7bce74ca4a91c2e816dbf91e"));
@@ -558,7 +558,7 @@ public class ResponseTest extends AbstractResponseTester {
             + "  \"id\": 1,\n"
             + "  \"result\": 0.13333333333333333\n"
             + "}");
-        AmonJoinRatio joinRatio = deserialiseResponse(AmonJoinRatio.class);
+        BSRRJoinRatio joinRatio = deserialiseResponse(BSRRJoinRatio.class);
         assertTrue(joinRatio.getJoinRatio() == 0.13333333333333333D);
     }
 
