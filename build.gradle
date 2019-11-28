@@ -75,7 +75,7 @@ configure(subprojects.findAll { it.name != 'integration-test' }) {
     uploadArchives {
         repositories {
             mavenDeployer {
-                repository(url: 'http://www.jworksuite.com:8082/nexus/content/repositories/releases/') {
+                repository(url: repositoryUrl) {
                     authentication(userName: mavenUser, password: mavenPassword)
                 }
             }
