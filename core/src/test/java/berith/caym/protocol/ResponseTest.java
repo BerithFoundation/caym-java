@@ -527,10 +527,10 @@ public class ResponseTest extends AbstractResponseTester {
     }
 
     @Test
-    public void testAmonBlockCreators() throws Exception {
+    public void testBsrrBlockCreators() throws Exception {
         // includes
-        // - amon_getBlockCreatorsByNumber
-        // - amon_getBlockCreatorsByHash
+        // - bsrr_getBlockCreatorsByNumber
+        // - bsrr_getBlockCreatorsByHash
         buildResponse("{\n"
             + "  \"jsonrpc\": \"2.0\",\n"
             + "  \"id\": 1,\n"
@@ -552,7 +552,7 @@ public class ResponseTest extends AbstractResponseTester {
     }
 
     @Test
-    public void testAmonJoinRatio() throws Exception {
+    public void testBsrrJoinRatio() throws Exception {
         buildResponse("{\n"
             + "  \"jsonrpc\": \"2.0\",\n"
             + "  \"id\": 1,\n"

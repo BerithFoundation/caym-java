@@ -4,7 +4,7 @@ import java.util.List;
 import org.web3j.protocol.core.Response;
 
 /**
- * response of amon_getBlockCreatorsByXXX
+ * response of bsrr_getBlockCreatorsByXXX
  */
 public class BSRRBlockCreators extends Response<List<String>> {
 
