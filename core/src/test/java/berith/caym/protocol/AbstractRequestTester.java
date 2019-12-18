@@ -22,6 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -29,6 +30,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okio.Buffer;
+
 import org.junit.Before;
 import org.web3j.protocol.http.HttpService;
 
@@ -43,8 +45,8 @@ public abstract class AbstractRequestTester {
     public void setUp() {
         requestInterceptor = new RequestInterceptor();
         httpClient = new OkHttpClient.Builder()
-            .addInterceptor(requestInterceptor)
-            .build();
+                .addInterceptor(requestInterceptor)
+                .build();
         httpService = new HttpService(httpClient);
         initWeb3Client(httpService);
     }
@@ -76,11 +78,11 @@ public abstract class AbstractRequestTester {
             requestBody = request.body();
 
             Response response = new Response.Builder()
-                .request(chain.request())
-                .protocol(Protocol.HTTP_2)
-                .code(200)
-                .message("")
-                .build();
+                    .request(chain.request())
+                    .protocol(Protocol.HTTP_2)
+                    .code(200)
+                    .message("")
+                    .build();
 
             return response;
         }

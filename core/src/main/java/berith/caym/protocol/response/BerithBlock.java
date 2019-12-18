@@ -16,22 +16,25 @@
 
 package berith.caym.protocol.response;
 
-import berith.caym.protocol.response.BerithBlock.Block;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+
 import org.web3j.protocol.ObjectMapperFactory;
 import org.web3j.protocol.core.Response;
-import org.web3j.utils.Numeric;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import berith.caym.protocol.response.BerithBlock.Block;
+import berith.caym.util.NumericUtil;
 
 /**
  * Berith block object
@@ -162,7 +165,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getNumber() {
-            return Numeric.decodeQuantity(number);
+            return NumericUtil.decodeQuantity(number);
         }
 
         public String getNumberRaw() {
@@ -190,7 +193,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getNonce() {
-            return Numeric.decodeQuantity(nonce);
+            return NumericUtil.decodeQuantity(nonce);
         }
 
         public String getNonceRaw() {
@@ -258,7 +261,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getDifficulty() {
-            return Numeric.decodeQuantity(difficulty);
+            return NumericUtil.decodeQuantity(difficulty);
         }
 
         public String getDifficultyRaw() {
@@ -270,7 +273,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getTotalDifficulty() {
-            return Numeric.decodeQuantity(totalDifficulty);
+            return NumericUtil.decodeQuantity(totalDifficulty);
         }
 
         public String getTotalDifficultyRaw() {
@@ -290,7 +293,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getSize() {
-            return Numeric.decodeQuantity(size);
+            return NumericUtil.decodeQuantity(size);
         }
 
         public String getSizeRaw() {
@@ -302,7 +305,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getGasLimit() {
-            return Numeric.decodeQuantity(gasLimit);
+            return NumericUtil.decodeQuantity(gasLimit);
         }
 
         public String getGasLimitRaw() {
@@ -314,7 +317,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getGasUsed() {
-            return Numeric.decodeQuantity(gasUsed);
+            return NumericUtil.decodeQuantity(gasUsed);
         }
 
         public String getGasUsedRaw() {
@@ -326,7 +329,7 @@ public class BerithBlock extends Response<Block> {
         }
 
         public BigInteger getTimestamp() {
-            return Numeric.decodeQuantity(timestamp);
+            return NumericUtil.decodeQuantity(timestamp);
         }
 
         public String getTimestampRaw() {

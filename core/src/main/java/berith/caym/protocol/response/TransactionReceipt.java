@@ -18,8 +18,10 @@ package berith.caym.protocol.response;
 
 import java.math.BigInteger;
 import java.util.List;
+
 import org.web3j.protocol.core.methods.response.Log;
-import org.web3j.utils.Numeric;
+
+import berith.caym.util.NumericUtil;
 
 public class TransactionReceipt {
 
@@ -102,7 +104,7 @@ public class TransactionReceipt {
     }
 
     public BigInteger getTransactionIndex() {
-        return Numeric.decodeQuantity(transactionIndex);
+        return NumericUtil.decodeQuantity(transactionIndex);
     }
 
     public String getTransactionIndexRaw() {
@@ -122,7 +124,7 @@ public class TransactionReceipt {
     }
 
     public BigInteger getBlockNumber() {
-        return Numeric.decodeQuantity(blockNumber);
+        return NumericUtil.decodeQuantity(blockNumber);
     }
 
     public String getBlockNumberRaw() {
@@ -134,7 +136,7 @@ public class TransactionReceipt {
     }
 
     public BigInteger getCumulativeGasUsed() {
-        return Numeric.decodeQuantity(cumulativeGasUsed);
+        return NumericUtil.decodeQuantity(cumulativeGasUsed);
     }
 
     public String getCumulativeGasUsedRaw() {
@@ -146,7 +148,7 @@ public class TransactionReceipt {
     }
 
     public BigInteger getGasUsed() {
-        return Numeric.decodeQuantity(gasUsed);
+        return NumericUtil.decodeQuantity(gasUsed);
     }
 
     public String getGasUsedRaw() {
@@ -177,7 +179,7 @@ public class TransactionReceipt {
         if (null == status) {
             return true;
         }
-        BigInteger statusQuantity = Numeric.decodeQuantity(status);
+        BigInteger statusQuantity = NumericUtil.decodeQuantity(status);
         return BigInteger.ONE.equals(statusQuantity);
     }
 

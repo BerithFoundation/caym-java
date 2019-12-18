@@ -16,9 +16,11 @@
 
 package berith.caym.protocol.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.math.BigInteger;
-import org.web3j.utils.Numeric;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import berith.caym.util.NumericUtil;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionRequest {
@@ -61,7 +63,7 @@ public class TransactionRequest {
 
     private static String convert(BigInteger value) {
         if (value != null) {
-            return Numeric.encodeQuantity(value);
+            return NumericUtil.encodeQuantity(value);
         } else {
             return null;  // we don't want the field to be encoded if not present
         }
@@ -114,7 +116,7 @@ public class TransactionRequest {
         this.value = value;
 
         if (data != null) {
-            this.data = Numeric.prependHexPrefix(data);
+            this.data = NumericUtil.prependHexPrefix(data);
         }
 
         this.nonce = nonce;
@@ -166,7 +168,6 @@ public class TransactionRequest {
         MAIN("MAIN"), STAKE("STAKE");
 
         private String value;
-
 
         Type(String value) {
             this.value = value;

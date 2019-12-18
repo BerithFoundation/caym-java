@@ -18,6 +18,7 @@ package berith.caym.protocol.response;
 
 import java.util.Collections;
 import java.util.List;
+
 import org.web3j.abi.FunctionReturnDecoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.AbiTypes;
@@ -30,7 +31,6 @@ import org.web3j.protocol.core.Response;
  */
 public class BerithCall extends Response<String> {
 
-    // Numeric.toHexString(Hash.sha3("Error(string)".getBytes())).substring(0, 10)
     private static final String errorMethodId = "0x08c379a0";
 
     @SuppressWarnings("unchecked")

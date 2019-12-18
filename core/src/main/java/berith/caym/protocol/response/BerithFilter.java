@@ -17,8 +17,10 @@
 package berith.caym.protocol.response;
 
 import java.math.BigInteger;
+
 import org.web3j.protocol.core.Response;
-import org.web3j.utils.Numeric;
+
+import berith.caym.util.NumericUtil;
 
 /**
  * response of berith_newFilter
@@ -26,6 +28,6 @@ import org.web3j.utils.Numeric;
 public class BerithFilter extends Response<String> {
 
     public BigInteger getFilterId() {
-        return Numeric.decodeQuantity(getResult());
+        return NumericUtil.decodeQuantity(getResult());
     }
 }

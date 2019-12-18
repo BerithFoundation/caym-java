@@ -61,7 +61,7 @@ public abstract class Filter<T> {
 
     public void run(ScheduledExecutorService scheduledExecutorService, long pollingInterval) {
         // berith node has deadline about filters.
-        if (pollingInterval <= DEFAULT_POLLING_DEADLINE) {
+        if (pollingInterval > DEFAULT_POLLING_DEADLINE) {
             logger.warn("recommend to use polling interval less then " + DEFAULT_POLLING_DEADLINE);
         }
 

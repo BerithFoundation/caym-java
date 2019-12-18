@@ -16,7 +16,8 @@
 package berith.caym.protocol.response;
 
 import java.math.BigInteger;
-import org.web3j.utils.Numeric;
+
+import berith.caym.util.NumericUtil;
 
 /**
  * Berith transaction
@@ -130,7 +131,7 @@ public class Transaction {
     }
 
     public BigInteger getNonce() {
-        return Numeric.decodeQuantity(nonce);
+        return NumericUtil.decodeQuantity(nonce);
     }
 
     public String getNonceRaw() {
@@ -150,7 +151,7 @@ public class Transaction {
     }
 
     public BigInteger getBlockNumber() {
-        return Numeric.decodeQuantity(blockNumber);
+        return NumericUtil.decodeQuantity(blockNumber);
     }
 
     public String getBlockNumberRaw() {
@@ -162,7 +163,7 @@ public class Transaction {
     }
 
     public BigInteger getTransactionIndex() {
-        return Numeric.decodeQuantity(transactionIndex);
+        return NumericUtil.decodeQuantity(transactionIndex);
     }
 
     public String getTransactionIndexRaw() {
@@ -190,7 +191,7 @@ public class Transaction {
     }
 
     public BigInteger getValue() {
-        return Numeric.decodeQuantity(value);
+        return NumericUtil.decodeQuantity(value);
     }
 
     public String getValueRaw() {
@@ -202,7 +203,7 @@ public class Transaction {
     }
 
     public BigInteger getGasPrice() {
-        return Numeric.decodeQuantity(gasPrice);
+        return NumericUtil.decodeQuantity(gasPrice);
     }
 
     public String getGasPriceRaw() {
@@ -214,7 +215,7 @@ public class Transaction {
     }
 
     public BigInteger getGas() {
-        return Numeric.decodeQuantity(gas);
+        return NumericUtil.decodeQuantity(gas);
     }
 
     public String getGasRaw() {
@@ -263,7 +264,7 @@ public class Transaction {
 
     public void setV(Object v) {
         if (v instanceof String) {
-            this.v = Numeric.toBigInt((String) v).longValueExact();
+            this.v = NumericUtil.toBigInt((String) v).longValueExact();
         } else if (v instanceof Integer) {
             this.v = ((Integer) v).longValue();
         } else {

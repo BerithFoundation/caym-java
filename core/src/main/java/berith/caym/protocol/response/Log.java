@@ -19,7 +19,8 @@ package berith.caym.protocol.response;
 
 import java.math.BigInteger;
 import java.util.List;
-import org.web3j.utils.Numeric;
+
+import berith.caym.util.NumericUtil;
 
 public class Log {
 
@@ -65,8 +66,8 @@ public class Log {
     }
 
     public Log(boolean removed, String logIndex, String transactionIndex, String transactionHash,
-        String blockHash, String blockNumber, String address, String data, String type,
-        List<String> topics) {
+               String blockHash, String blockNumber, String address, String data, String type,
+               List<String> topics) {
         this.removed = removed;
         this.logIndex = logIndex;
         this.transactionIndex = transactionIndex;
@@ -173,7 +174,7 @@ public class Log {
 
     private BigInteger convert(String value) {
         if (value != null) {
-            return Numeric.decodeQuantity(value);
+            return NumericUtil.decodeQuantity(value);
         } else {
             return null;
         }
@@ -184,11 +185,11 @@ public class Log {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof org.web3j.protocol.core.methods.response.Log)) {
+        if (!(o instanceof Log)) {
             return false;
         }
 
-        org.web3j.protocol.core.methods.response.Log log = (org.web3j.protocol.core.methods.response.Log) o;
+        Log log = (Log) o;
 
         if (isRemoved() != log.isRemoved()) {
             return false;
@@ -234,7 +235,7 @@ public class Log {
         int result = (isRemoved() ? 1 : 0);
         result = 31 * result + (getLogIndexRaw() != null ? getLogIndexRaw().hashCode() : 0);
         result = 31 * result
-            + (getTransactionIndexRaw() != null ? getTransactionIndexRaw().hashCode() : 0);
+                 + (getTransactionIndexRaw() != null ? getTransactionIndexRaw().hashCode() : 0);
         result = 31 * result + (getTransactionHash() != null ? getTransactionHash().hashCode() : 0);
         result = 31 * result + (getBlockHash() != null ? getBlockHash().hashCode() : 0);
         result = 31 * result + (getBlockNumberRaw() != null ? getBlockNumberRaw().hashCode() : 0);
@@ -248,16 +249,16 @@ public class Log {
     @Override
     public String toString() {
         return "Log{"
-            + "removed=" + removed
-            + ", logIndex='" + logIndex + '\''
-            + ", transactionIndex='" + transactionIndex + '\''
-            + ", transactionHash='" + transactionHash + '\''
-            + ", blockHash='" + blockHash + '\''
-            + ", blockNumber='" + blockNumber + '\''
-            + ", address='" + address + '\''
-            + ", data='" + data + '\''
-            + ", type='" + type + '\''
-            + ", topics=" + topics
-            + '}';
+               + "removed=" + removed
+               + ", logIndex='" + logIndex + '\''
+               + ", transactionIndex='" + transactionIndex + '\''
+               + ", transactionHash='" + transactionHash + '\''
+               + ", blockHash='" + blockHash + '\''
+               + ", blockNumber='" + blockNumber + '\''
+               + ", address='" + address + '\''
+               + ", data='" + data + '\''
+               + ", type='" + type + '\''
+               + ", topics=" + topics
+               + '}';
     }
 }

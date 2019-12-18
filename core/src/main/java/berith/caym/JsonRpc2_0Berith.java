@@ -16,6 +16,20 @@
 
 package berith.caym;
 
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
+
+import org.web3j.protocol.Web3jService;
+import org.web3j.protocol.admin.Admin;
+import org.web3j.protocol.admin.methods.response.BooleanResponse;
+import org.web3j.protocol.core.DefaultBlockParameter;
+import org.web3j.protocol.core.Request;
+import org.web3j.protocol.core.methods.response.NetVersion;
+import org.web3j.protocol.core.methods.response.Web3ClientVersion;
+import org.web3j.protocol.core.methods.response.Web3Sha3;
+
 import berith.caym.protocol.request.BerithFilterRequest;
 import berith.caym.protocol.request.TransactionRequest;
 import berith.caym.protocol.response.BSRRBlockCreators;
@@ -35,19 +49,7 @@ import berith.caym.protocol.response.BerithSyncing;
 import berith.caym.protocol.response.BerithTransaction;
 import berith.caym.protocol.response.BerithUninstallFilter;
 import berith.caym.protocol.response.Quantity;
-import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import org.web3j.protocol.Web3jService;
-import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.admin.methods.response.BooleanResponse;
-import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.Request;
-import org.web3j.protocol.core.methods.response.NetVersion;
-import org.web3j.protocol.core.methods.response.Web3ClientVersion;
-import org.web3j.protocol.core.methods.response.Web3Sha3;
-import org.web3j.utils.Numeric;
+import berith.caym.util.NumericUtil;
 
 /**
  * Implements of {@link Berith}
@@ -65,370 +67,380 @@ public class JsonRpc2_0Berith implements Berith {
     @Override
     public Request<?, Web3ClientVersion> web3ClientVersion() {
         return new Request<>(
-            "web3_clientVersion",
-            Collections.<String>emptyList(),
-            web3jService,
-            Web3ClientVersion.class);
+                "web3_clientVersion",
+                Collections.<String>emptyList(),
+                web3jService,
+                Web3ClientVersion.class);
     }
 
     @Override
     public Request<?, Web3Sha3> web3Sha3(String data) {
         return new Request<>(
-            "web3_sha3",
-            Arrays.asList(data),
-            web3jService,
-            Web3Sha3.class);
+                "web3_sha3",
+                Arrays.asList(data),
+                web3jService,
+                Web3Sha3.class);
     }
 
     @Override
     public Request<?, NetVersion> netVersion() {
         return new Request<>(
-            "net_version",
-            Collections.<String>emptyList(),
-            web3jService,
-            NetVersion.class);
+                "net_version",
+                Collections.<String>emptyList(),
+                web3jService,
+                NetVersion.class);
     }
 
     @Override
     public Request<?, Quantity> netPeerCount() {
         return new Request<>(
-            "net_peerCount",
-            Collections.<String>emptyList(),
-            web3jService,
-            Quantity.class);
+                "net_peerCount",
+                Collections.<String>emptyList(),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, BooleanResponse> netListening() {
         return new Request<>(
-            "net_listening",
-            Collections.<String>emptyList(),
-            web3jService,
-            BooleanResponse.class);
+                "net_listening",
+                Collections.<String>emptyList(),
+                web3jService,
+                BooleanResponse.class);
     }
 
     @Override
     public Request<?, BerithProtocolVersion> berithProtocolVersion() {
         return new Request<>(
-            "berith_protocolVersion",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithProtocolVersion.class);
+                "berith_protocolVersion",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithProtocolVersion.class);
     }
 
     @Override
     public Request<?, BerithCoinbase> berithCoinbase() {
         return new Request<>(
-            "berith_coinbase",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithCoinbase.class);
+                "berith_coinbase",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithCoinbase.class);
     }
 
     @Override
     public Request<?, BerithSyncing> berithSyncing() {
         return new Request<>(
-            "berith_syncing",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithSyncing.class);
+                "berith_syncing",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithSyncing.class);
     }
 
     @Override
     public Request<?, BooleanResponse> berithMining() {
         return new Request<>(
-            "berith_mining",
-            Collections.<String>emptyList(),
-            web3jService,
-            BooleanResponse.class);
+                "berith_mining",
+                Collections.<String>emptyList(),
+                web3jService,
+                BooleanResponse.class);
     }
 
     @Override
     public Request<?, Quantity> berithGasPrice() {
         return new Request<>(
-            "berith_gasPrice",
-            Collections.<String>emptyList(),
-            web3jService,
-            Quantity.class);
+                "berith_gasPrice",
+                Collections.<String>emptyList(),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, BerithAccounts> berithAccounts() {
         return new Request<>(
-            "berith_accounts",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithAccounts.class);
+                "berith_accounts",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithAccounts.class);
     }
 
     @Override
     public Request<?, Quantity> berithBlockNumber() {
         return new Request<>(
-            "berith_blockNumber",
-            Collections.<String>emptyList(),
-            web3jService,
-            Quantity.class);
+                "berith_blockNumber",
+                Collections.<String>emptyList(),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, Quantity> berithGetBalance(String address, DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getBalance",
-            Arrays.asList(address, defaultBlockParameter),
-            web3jService,
-            Quantity.class);
+                "berith_getBalance",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
-    public Request<?, Quantity> berithGetStakeBalance(String address, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, Quantity> berithGetStakeBalance(String address,
+                                                      DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getStakeBalance",
-            Arrays.asList(address, defaultBlockParameter),
-            web3jService,
-            Quantity.class);
+                "berith_getStakeBalance",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
-    public Request<?, Quantity> berithGetTransactionCount(String address, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, Quantity> berithGetTransactionCount(String address,
+                                                          DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getTransactionCount",
-            Arrays.asList(address, defaultBlockParameter),
-            web3jService,
-            Quantity.class);
+                "berith_getTransactionCount",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, Quantity> berithGetBlockTransactionCountByHash(String blockHash) {
         return new Request<>(
-            "berith_getBlockTransactionCountByHash",
-            Arrays.asList(blockHash),
-            web3jService,
-            Quantity.class);
+                "berith_getBlockTransactionCountByHash",
+                Arrays.asList(blockHash),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
-    public Request<?, Quantity> berithGetBlockTransactionCountByNumber(DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, Quantity> berithGetBlockTransactionCountByNumber(
+            DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getBlockTransactionCountByNumber",
-            Arrays.asList(defaultBlockParameter),
-            web3jService,
-            Quantity.class);
+                "berith_getBlockTransactionCountByNumber",
+                Arrays.asList(defaultBlockParameter),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, Quantity> berithGetUncleCountByBlockHash(String blockHash) {
         return new Request<>(
-            "berith_getUncleCountByBlockHash",
-            Arrays.asList(blockHash),
-            web3jService,
-            Quantity.class);
+                "berith_getUncleCountByBlockHash",
+                Arrays.asList(blockHash),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, Quantity> berithGetUncleCountByBlockNumber(DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getUncleCountByBlockNumber",
-            Arrays.asList(defaultBlockParameter),
-            web3jService,
-            Quantity.class);
+                "berith_getUncleCountByBlockNumber",
+                Arrays.asList(defaultBlockParameter),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
-    public Request<?, BerithGetCode> berithGetCode(String address, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BerithGetCode> berithGetCode(String address,
+                                                   DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_getCode",
-            Arrays.asList(address, defaultBlockParameter),
-            web3jService,
-            BerithGetCode.class);
+                "berith_getCode",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                BerithGetCode.class);
     }
 
     @Override
     public Request<?, BerithSign> berithSign(String address, String sha3HashOfDataToSign) {
         return new Request<>(
-            "berith_sign",
-            Arrays.asList(address, sha3HashOfDataToSign),
-            web3jService,
-            BerithSign.class);
+                "berith_sign",
+                Arrays.asList(address, sha3HashOfDataToSign),
+                web3jService,
+                BerithSign.class);
     }
 
     @Override
     public Request<?, BerithSendTransaction> berithSendTransaction(TransactionRequest transactionRequest) {
         return new Request<>(
-            "berith_sendTransaction",
-            Arrays.asList(transactionRequest),
-            web3jService,
-            BerithSendTransaction.class);
+                "berith_sendTransaction",
+                Arrays.asList(transactionRequest),
+                web3jService,
+                BerithSendTransaction.class);
     }
 
     @Override
     public Request<?, BerithSendTransaction> berithSendRawTransaction(String rawTransaction) {
         return new Request<>(
-            "berith_sendRawTransaction",
-            Arrays.asList(rawTransaction),
-            web3jService,
-            BerithSendTransaction.class);
+                "berith_sendRawTransaction",
+                Arrays.asList(rawTransaction),
+                web3jService,
+                BerithSendTransaction.class);
     }
 
     @Override
-    public Request<?, BerithCall> berithCall(TransactionRequest transactionRequest, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BerithCall> berithCall(TransactionRequest transactionRequest,
+                                             DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "berith_call",
-            Arrays.asList(transactionRequest, defaultBlockParameter),
-            web3jService,
-            BerithCall.class);
+                "berith_call",
+                Arrays.asList(transactionRequest, defaultBlockParameter),
+                web3jService,
+                BerithCall.class);
     }
 
     @Override
     public Request<?, Quantity> berithEstimateGas(TransactionRequest transactionRequest) {
         return new Request<>(
-            "berith_eth_estimateGas",
-            Arrays.asList(transactionRequest),
-            web3jService,
-            Quantity.class);
+                "berith_eth_estimateGas",
+                Arrays.asList(transactionRequest),
+                web3jService,
+                Quantity.class);
     }
 
     @Override
     public Request<?, BerithBlock> berithGetBlockByHash(String blockHash, boolean fullTransactionObjects) {
         return new Request<>(
-            "berith_getBlockByHash",
-            Arrays.asList(blockHash, fullTransactionObjects),
-            web3jService,
-            BerithBlock.class);
+                "berith_getBlockByHash",
+                Arrays.asList(blockHash, fullTransactionObjects),
+                web3jService,
+                BerithBlock.class);
     }
 
     @Override
-    public Request<?, BerithBlock> berithGetBlockByNumber(DefaultBlockParameter defaultBlockParameter, boolean fullTransactionObjects) {
+    public Request<?, BerithBlock> berithGetBlockByNumber(DefaultBlockParameter defaultBlockParameter,
+                                                          boolean fullTransactionObjects) {
         return new Request<>(
-            "berith_getBlockByNumber",
-            Arrays.asList(defaultBlockParameter, fullTransactionObjects),
-            web3jService,
-            BerithBlock.class);
+                "berith_getBlockByNumber",
+                Arrays.asList(defaultBlockParameter, fullTransactionObjects),
+                web3jService,
+                BerithBlock.class);
     }
 
     @Override
     public Request<?, BerithTransaction> berithGetTransactionByHash(String transactionHash) {
         return new Request<>(
-            "berith_getTransactionByHash",
-            Arrays.asList(transactionHash),
-            web3jService,
-            BerithTransaction.class);
+                "berith_getTransactionByHash",
+                Arrays.asList(transactionHash),
+                web3jService,
+                BerithTransaction.class);
     }
 
     @Override
-    public Request<?, BerithTransaction> berithGetTransactionByBlockHashAndIndex(String blockHash, BigInteger transactionIndex) {
+    public Request<?, BerithTransaction> berithGetTransactionByBlockHashAndIndex(String blockHash,
+                                                                                 BigInteger transactionIndex) {
         return new Request<>(
-            "berith_getTransactionByBlockHashAndIndex",
-            Arrays.asList(blockHash, Numeric.toHexStringWithPrefixSafe(transactionIndex)),
-            web3jService,
-            BerithTransaction.class);
+                "berith_getTransactionByBlockHashAndIndex",
+                Arrays.asList(blockHash, NumericUtil.toHexStringWithPrefixSafe(transactionIndex)),
+                web3jService,
+                BerithTransaction.class);
     }
 
     @Override
-    public Request<?, BerithTransaction> berithGetTransactionByBlockNumberAndIndex(DefaultBlockParameter defaultBlockParameter,
-        BigInteger transactionIndex) {
+    public Request<?, BerithTransaction> berithGetTransactionByBlockNumberAndIndex(
+            DefaultBlockParameter defaultBlockParameter,
+            BigInteger transactionIndex) {
         return new Request<>(
-            "berith_getTransactionByBlockNumberAndIndex",
-            Arrays.asList(defaultBlockParameter, Numeric.toHexStringWithPrefixSafe(transactionIndex)),
-            web3jService,
-            BerithTransaction.class);
+                "berith_getTransactionByBlockNumberAndIndex",
+                Arrays.asList(defaultBlockParameter, NumericUtil.toHexStringWithPrefixSafe(transactionIndex)),
+                web3jService,
+                BerithTransaction.class);
     }
 
     @Override
     public Request<?, BerithGetTransactionReceipt> berithGetTransactionReceipt(String transactionHash) {
         return new Request<>(
-            "berith_getTransactionReceipt",
-            Arrays.asList(transactionHash),
-            web3jService,
-            BerithGetTransactionReceipt.class);
+                "berith_getTransactionReceipt",
+                Arrays.asList(transactionHash),
+                web3jService,
+                BerithGetTransactionReceipt.class);
     }
 
     @Override
     public Request<?, BerithFilter> berithNewFilter(BerithFilterRequest berithFilter) {
         return new Request<>(
-            "berith_newFilter",
-            Arrays.asList(berithFilter),
-            web3jService,
-            BerithFilter.class);
+                "berith_newFilter",
+                Arrays.asList(berithFilter),
+                web3jService,
+                BerithFilter.class);
     }
 
     @Override
     public Request<?, BerithFilter> berithNewBlockFilter() {
         return new Request<>(
-            "berith_newBlockFilter",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithFilter.class);
+                "berith_newBlockFilter",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithFilter.class);
     }
 
     @Override
     public Request<?, BerithFilter> berithNewPendingTransactionFilter() {
         return new Request<>(
-            "berith_newPendingTransactionFilter",
-            Collections.<String>emptyList(),
-            web3jService,
-            BerithFilter.class);
+                "berith_newPendingTransactionFilter",
+                Collections.<String>emptyList(),
+                web3jService,
+                BerithFilter.class);
     }
 
     @Override
     public Request<?, BerithUninstallFilter> berithUninstallFilter(BigInteger filterId) {
         return new Request<>(
-            "berith_uninstallFilter",
-            Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-            web3jService,
-            BerithUninstallFilter.class);
+                "berith_uninstallFilter",
+                Arrays.asList(NumericUtil.toHexStringWithPrefixSafe(filterId)),
+                web3jService,
+                BerithUninstallFilter.class);
     }
 
     @Override
     public Request<?, BerithLog> berithGetFilterChanges(BigInteger filterId) {
         return new Request<>(
-            "berith_getFilterChanges",
-            Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-            web3jService,
-            BerithLog.class);
+                "berith_getFilterChanges",
+                Arrays.asList(NumericUtil.toHexStringWithPrefixSafe(filterId)),
+                web3jService,
+                BerithLog.class);
     }
 
     @Override
     public Request<?, BerithLog> berithGetFilterLogs(BigInteger filterId) {
         return new Request<>(
-            "berith_getFilterLogs",
-            Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-            web3jService,
-            BerithLog.class);
+                "berith_getFilterLogs",
+                Arrays.asList(NumericUtil.toHexStringWithPrefixSafe(filterId)),
+                web3jService,
+                BerithLog.class);
     }
 
     @Override
     public Request<?, BerithLog> berithGetLogs(BerithFilterRequest berithFilterRequest) {
         return new Request<>(
-            "berith_getLogs",
-            Arrays.asList(berithFilterRequest),
-            web3jService,
-            BerithLog.class);
+                "berith_getLogs",
+                Arrays.asList(berithFilterRequest),
+                web3jService,
+                BerithLog.class);
     }
 
     @Override
-    public Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByNumber(DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByNumber(
+            DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "bsrr_getBlockCreatorsByNumber",
-            Arrays.asList(defaultBlockParameter),
-            web3jService,
-            BSRRBlockCreators.class);
+                "bsrr_getBlockCreatorsByNumber",
+                Arrays.asList(defaultBlockParameter),
+                web3jService,
+                BSRRBlockCreators.class);
     }
 
     @Override
     public Request<?, BSRRBlockCreators> bsrrGetBlockCreatorsByHash(String blockHash) {
         return new Request<>(
-            "bsrr_getBlockCreatorsByHash",
-            Arrays.asList(blockHash),
-            web3jService,
-            BSRRBlockCreators.class);
+                "bsrr_getBlockCreatorsByHash",
+                Arrays.asList(blockHash),
+                web3jService,
+                BSRRBlockCreators.class);
     }
 
     @Override
-    public Request<?, BSRRJoinRatio> bsrrGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter) {
+    public Request<?, BSRRJoinRatio> bsrrGetJoinRatio(String address,
+                                                      DefaultBlockParameter defaultBlockParameter) {
         return new Request<>(
-            "bsrr_getJoinRatio",
-            Arrays.asList(address, defaultBlockParameter),
-            web3jService,
-            BSRRJoinRatio.class);
+                "bsrr_getJoinRatio",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                BSRRJoinRatio.class);
     }
 }

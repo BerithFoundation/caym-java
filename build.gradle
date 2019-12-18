@@ -5,6 +5,7 @@ buildscript {
     // test dependencies
     ext.junitVersion = '4.12'
     ext.mockitoVersion = '1.10.19'
+    ext.assertjVersion = '3.13.2'
 }
 
 plugins {
@@ -36,6 +37,7 @@ subprojects {
     dependencies {
         testCompile "junit:junit:$junitVersion",
                 "org.mockito:mockito-core:$mockitoVersion",
+                "org.assertj:assertj-core:$assertjVersion",
                 "ch.qos.logback:logback-core:1.2.3",
                 "ch.qos.logback:logback-classic:1.2.3"
     }
