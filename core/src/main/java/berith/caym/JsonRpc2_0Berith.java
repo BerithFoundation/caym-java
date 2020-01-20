@@ -288,7 +288,7 @@ public class JsonRpc2_0Berith implements Berith {
     @Override
     public Request<?, Quantity> berithEstimateGas(TransactionRequest transactionRequest) {
         return new Request<>(
-                "berith_eth_estimateGas",
+                "berith_estimateGas",
                 Arrays.asList(transactionRequest),
                 web3jService,
                 Quantity.class);

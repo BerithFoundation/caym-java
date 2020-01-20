@@ -301,7 +301,7 @@ public class RequestTest extends AbstractRequestTester {
             "0xaaa"
         );
         caym.berith().berithEstimateGas(transactionRequest).send();
-        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"berith_eth_estimateGas\",\"params\":["
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"berith_estimateGas\",\"params\":["
             + "{\"from\":\"Bxa94f5374fce5edbc8e2a8697c15331677e6ebf0b\","
             + "\"to\":\"Bxd46e8dd67c5d32be8058bb8eb970870f07244567\","
             + "\"gas\":\"0xa\","
