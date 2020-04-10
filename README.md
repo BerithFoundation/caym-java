@@ -4,7 +4,7 @@ Welcome to Caym for berith project. The caym helps facilitate Java applications 
 
 ## Fetures  
 
-- Complete implementation of Berith's JSON-RPC client API over HTTP and IPC, WebSocket.  
+- Complete implementation of Berith's JSON-RPC client API over HTTP and IPC, WebSocket.
 
 ## Getting started  
 
@@ -22,33 +22,50 @@ will be added
 
 ---  
 
-## Start a berith client  
+### Start a berith client with `http`, `ipc`, `websocket` protocol  
 
 > http  
 
-```aidl
+```java
 Caym caym = Caym.build(new HttpService("http://localhost:8545"));
 ```  
 
 > ipc  
 
-```aidl
+```java
 Caym caym = Caym.build(new UnixIpcService("/home/app/workspaces/berith/node1/node.ipc"));
 ```  
 
 > websocket  
   
-```aidl
+```java
 WebSocketService webSocketService = new WebSocketService("ws://localhost:9545", false);
 webSocketService.connect();
 Caym caym = Caym.build(webSocketService);
 ```
 
-## Start filters  
+> basic usage  
 
-> ### new block filter
+```java
+// get latest block with transaction
+Block block = caym.berith()
+                  .berithGetBlockByNumber(DefaultBlockParameterName.LATEST, true)
+                  .send()
+                  .getBlock();
 
-```aidl
+// get transaction by hash
+Optional<Transaction> transactionOptional = caym.berith()
+                                                .berithGetTransactionByHash(
+                                                        "0x892a21d9a89afbef98487e3eddebb01b122d36bb899b2fb213a5101bd7b55237")
+                                                .send()
+                                                .getTransaction();
+```
+
+### Start filters  
+
+> #### new block filter
+
+```java
 final Caym caym = Caym.build(new HttpService("http://localhost:8545"));
 Callback<String> blockHashCallback = new Callback<String>() {
   @Override
@@ -70,9 +87,9 @@ BlockFilter blockFilter = new BlockFilter(caym, blockHashCallback);
 blockFilter.run(Async.defaultExecutorService(), 5000L);
 ```  
 
-> ### new pending transaction filter  
+> #### new pending transaction filter  
 
-```aidl
+```java
 final Caym caym = Caym.build(new HttpService("http://localhost:8545"));
 Callback<String> txHashCallback = new Callback<String>() {
   @Override
@@ -88,4 +105,32 @@ Callback<String> txHashCallback = new Callback<String>() {
 
 PendingTransactionFilter filter = new PendingTransactionFilter(caym, txHashCallback);
 filter.run(Async.defaultExecutorService(), 1000L);
-```
+```  
+
+## Sign transaction
+
+> #### sign transaction message with `ECKeyPair`
+>
+```java
+ECKeyPair keyPair;
+long chainId = 106L;
+RawTransaction rawTransaction = RawTransaction.createTransferTransaction(
+        BigInteger.ZERO, // nonce
+        BigInteger.ONE, // gasPrice
+        BigInteger.TEN, // gasLimit
+        "af304e6259984a857d43406efa1d6528f4055a69", // to
+        Convert.toWei(new BigDecimal("0x1"), Unit.ETHER).toBigInteger() // value
+);
+
+// Sign transaction message and setted r,s,v in RawTransaction object
+Signer.signTransaction(chainId, rawTransaction, keyPair);
+String rawTransactionHash = rawTransaction.getRawHash();
+String transactionHash = caym.berith()
+                             .berithSendRawTransaction(rawTransactionHash)
+                             .send()
+                             .getTransactionHash();
+```  
+
+  
+
+
