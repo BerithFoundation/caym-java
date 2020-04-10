@@ -59,7 +59,19 @@ Optional<Transaction> transactionOptional = caym.berith()
                                                         "0x892a21d9a89afbef98487e3eddebb01b122d36bb899b2fb213a5101bd7b55237")
                                                 .send()
                                                 .getTransaction();
-```
+```  
+
+> batch usage  
+
+```java
+BatchResponse response = caym.newBatch()
+                         .add(caym.berith().web3ClientVersion())
+                         .add(caym.berith().netVersion())
+                         .send();
+
+Web3ClientVersion clientVersion = (Web3ClientVersion)response.getResponses().get(0);
+NetVersion netVersion = (NetVersion)response.getResponses().get(1);
+```  
 
 ### Start filters  
 
@@ -109,7 +121,7 @@ filter.run(Async.defaultExecutorService(), 1000L);
 
 ## Sign transaction
 
-> #### sign transaction message with `ECKeyPair`
+> #### sign transaction message by using `ECKeyPair`
 >
 ```java
 ECKeyPair keyPair;

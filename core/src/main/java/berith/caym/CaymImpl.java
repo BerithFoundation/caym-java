@@ -20,6 +20,7 @@ import java.util.Objects;
 import org.web3j.protocol.Web3jService;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.JsonRpc2_0Admin;
+import org.web3j.protocol.core.BatchRequest;
 import org.web3j.protocol.http.HttpService;
 
 /**
@@ -53,5 +54,10 @@ public class CaymImpl implements Caym {
     @Override
     public Web3jService getWeb3JService() {
         return web3jService;
+    }
+
+    @Override
+    public BatchRequest newBatch() {
+        return new BatchRequest(web3jService);
     }
 }

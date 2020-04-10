@@ -1,5 +1,5 @@
 buildscript {
-    ext.web3jVersion = '4.5.5'
+    ext.web3jVersion = '4.5.17'
     ext.slf4jVersion = '1.7.25'
 
     // test dependencies
