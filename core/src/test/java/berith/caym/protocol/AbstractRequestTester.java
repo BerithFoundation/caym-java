@@ -24,17 +24,21 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.Buffer;
 
 import org.junit.Before;
 import org.web3j.protocol.http.HttpService;
 
 public abstract class AbstractRequestTester {
+
+    public static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 
     private OkHttpClient httpClient;
     private HttpService httpService;
@@ -81,6 +85,11 @@ public abstract class AbstractRequestTester {
                     .request(chain.request())
                     .protocol(Protocol.HTTP_2)
                     .code(200)
+                    .body(
+                            ResponseBody.create(
+                                    "{\"jsonrpc\":\"2.0\",\"method\":\"\","
+                                    + "\"params\":[],\"id\":1}",
+                                    JSON_MEDIA_TYPE))
                     .message("")
                     .build();
 

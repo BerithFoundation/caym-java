@@ -1,8 +1,9 @@
 package berith.caym;
 
 import org.web3j.protocol.Web3jService;
+import org.web3j.protocol.core.Batcher;
 
-public interface Caym {
+public interface Caym extends Batcher {
 
     /**
      * default http url

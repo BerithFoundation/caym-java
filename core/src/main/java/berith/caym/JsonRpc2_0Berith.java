@@ -57,7 +57,7 @@ import berith.caym.util.NumericUtil;
 public class JsonRpc2_0Berith implements Berith {
 
     protected final Web3jService web3jService;
-    private Admin web3j;
+    private final Admin web3j;
 
     public JsonRpc2_0Berith(Web3jService web3jService, Admin web3j) {
         this.web3jService = Objects.requireNonNull(web3jService, "web3jService");
