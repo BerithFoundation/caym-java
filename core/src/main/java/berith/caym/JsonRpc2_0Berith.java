@@ -443,4 +443,13 @@ public class JsonRpc2_0Berith implements Berith {
                 web3jService,
                 BSRRJoinRatio.class);
     }
+
+    @Override
+    public Request<?, BSRRJoinRatio> berithContract(String address, DefaultBlockParameter defaultBlockParameter) {
+        return new Request<>(
+                "berith_contract",
+                Arrays.asList(address, defaultBlockParameter),
+                web3jService,
+                BSRRJoinRatio.class);
+    }
 }

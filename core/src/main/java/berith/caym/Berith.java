@@ -250,4 +250,9 @@ public interface Berith {
      * Returns a probability of the top of block creators
      */
     Request<?, BSRRJoinRatio> bsrrGetJoinRatio(String address, DefaultBlockParameter defaultBlockParameter);
+
+    /**
+     * Creates Contract
+     */
+    Request<?, BSRRJoinRatio> berithContract(String address, DefaultBlockParameter defaultBlockParameter);
 }
